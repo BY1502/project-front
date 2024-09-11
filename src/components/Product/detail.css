@@ -1,0 +1,141 @@
+.detail-container {
+  display: flex;
+  width: 100%;
+  margin: 120px 0;
+  padding-left: 80px;
+}
+
+.image-container {
+  width: 52%;
+}
+
+.image-gallery .main-p-img {
+  display: flex;
+  width: 100%;
+  height: 880px;
+  margin-bottom: 80px;
+  display: block;
+  object-fit: cover;
+}
+
+.image-gallery .concept-img {
+  display: flex;
+  width: 100%;
+  background-color: #666;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.product-details {
+  position: sticky;
+  width: 42%;
+  right: 0;
+  top: 0;
+  background-color: #f5f2f0;
+  padding-left: 80px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.details-text-container {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 40px 80px;
+}
+
+.details-product-title {
+  font-size: 32px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.details-product-price {
+  font-size: 18px;
+  font-weight: 400;
+  padding-bottom: 50px;
+}
+
+.details-product-description {
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 85%;
+  overflow-wrap: break-word;
+  word-break: keep-all;
+  white-space: normal;
+  padding-bottom: 40px;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.quantity-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-selector input {
+  width: 40px;
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.total-price {
+  font-size: 18px;
+  font-weight: bold;
+  /* margin-bottom: 20px; */
+}
+
+.minus-icon,
+.plus-icon {
+  cursor: pointer;
+  font-size: 24px;
+  margin: 5px;
+  padding: 0;
+}
+
+.button-container {
+  margin-top: 20px;
+  height: 50px;
+  display: flex;
+  gap: 20px;
+}
+
+.buy-now {
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.add-to-cart {
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: 1px solid #666;
+  background-color: #fff;
+  color: #222;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+  cursor: pointer;
+}

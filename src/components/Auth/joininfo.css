@@ -1,0 +1,50 @@
+.join-title {
+  font-size: 48px;
+  font-weight: 600;
+  text-align: center;
+  color: black;
+  margin-top: 120px;
+}
+
+.join-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.signup-form label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: #4b3b31;
+}
+
+.signup-form input {
+  width: 540px;
+  height: 50px;
+  padding: 0.75rem; /* 입력 필드 내부 여백 */
+  border: 1px solid #bbb; /* 입력 필드 경계선 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  font-size: 14px;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 4px; /* 메시지와 입력 필드 간격 */
+}
+
+.signup-form button {
+  margin-top: 40px;
+  width: 100%;
+  height: 60px;
+  padding: 0.75rem;
+  background-color: #4b3b31;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}

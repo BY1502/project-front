@@ -1,0 +1,239 @@
+.cart-table {
+  margin-top: 40px;
+  width: calc(100% - 160px); /* 양옆 패딩 80px씩 빼기 */
+  margin-left: 80px; /* 왼쪽에 80px 패딩 추가 */
+  margin-right: 80px; /* 오른쪽에 80px 패딩 추가 */
+  border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+  margin-bottom: -1.5px;
+  border-bottom: 1px solid #aeaeae; /* 세로선 대신 하단에만 테두리 적용 */
+}
+
+.cart-table th {
+  text-align: center;
+  border-top: 1px solid #222;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px 0;
+  background-color: #e0dbd7;
+}
+
+.cart-table td {
+  padding: 12px 0;
+  height: 185.5px;
+}
+
+/* 장바구니가 비었을 때 메시지 */
+.empty-cart-message {
+  text-align: center; /* 가운데 정렬 */
+  font-size: 18px; /* 폰트 크기 */
+  font-weight: 400; /* 폰트 두께 */
+  height: 180px;
+}
+
+/* 각 열(td)의 너비 설정 */
+.cart-table th:nth-child(1), /* 체크박스 */
+.cart-table td:nth-child(1) {
+  width: 104px;
+}
+
+.cart-table th:nth-child(2), /* 상품명 */
+.cart-table td:nth-child(2) {
+  width: 816px;
+}
+
+.cart-table th:nth-child(3), /* 수량변경 */
+.cart-table td:nth-child(3) {
+  width: 300px;
+}
+
+.cart-table th:nth-child(4), /* 결제금액 */
+.cart-table td:nth-child(4) {
+  width: 300px;
+}
+
+.cart-table th:nth-child(5), /* 선택 */
+.cart-table td:nth-child(5) {
+  width: 240px;
+}
+
+/* 체크박스 td css */
+.checkbox-td {
+  padding-top: 10px;
+  text-align: center;
+}
+
+/* 체크박스 스타일 */
+.cart-table input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  appearance: none; /* 기본 브라우저 스타일 제거 */
+  border: 2px solid #aeaeae;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+.cart-table input[type='checkbox']:checked {
+  background-color: #222;
+  border-color: #222;
+}
+
+.cart-table input[type='checkbox']::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  opacity: 0;
+}
+
+.cart-table input[type='checkbox']:checked::before {
+  opacity: 1;
+}
+
+/* 상품명 td css */
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+.product-info > img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  margin: 0 40px 0 20px;
+}
+
+.product-info > span {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* 수량변경 td css */
+.quantity-td {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quantity-td > input {
+  width: 40px;
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* 결제금액 td css */
+.price-td {
+  text-align: center;
+}
+
+/* 선택 td css */
+.option-td {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+}
+
+.cart-order {
+  width: 60%;
+  padding: 12px 20px;
+  background-color: #222;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.cart-delete {
+  width: 60%;
+  padding: 12px 20px;
+  background-color: #fff;
+  color: #222;
+  border: none;
+  cursor: pointer;
+  border: 1px solid #666;
+  border-radius: 8px;
+}
+
+/* 하단 결제창 */
+.cart-total {
+  margin: 0 80px;
+  padding: 20px 40px 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #222;
+}
+
+.cart-caution {
+  font-size: 14px;
+  color: #aeaeae;
+}
+
+.c-total-price {
+  width: 22%;
+  padding-right: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.c-text {
+  font-size: 16px;
+}
+
+.c-number {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* 버튼 섹션 */
+.cart-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 80px;
+}
+
+/* 선택상품 삭제 버튼 */
+.delete-selected {
+  padding: 12px 20px;
+  background-color: #fff;
+  color: #222;
+  border: 1px solid #666;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 180px;
+}
+
+/* 주문 버튼 */
+.order-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+/* 선택상품 주문 버튼 */
+.order-selected,
+.order-all {
+  padding: 12px 20px;
+  background-color: #222;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 180px;
+}
+
+/* 전체상품 주문 버튼 */
+.order-all {
+  background-color: #e74c3c;
+}

@@ -1,0 +1,177 @@
+.weekly-container {
+  margin-top: 180px;
+}
+
+.section-top {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  height: 340px;
+  border: none;
+  background-color: #e0dbd7;
+}
+
+.section-left {
+  padding: 80px;
+  display: flex;
+  flex: 0.5;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-left h1 {
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.section-left h5 {
+  margin-top: 14px;
+  font-size: 18px;
+  color: #4b3b31;
+}
+
+.section-right {
+  display: flex;
+  flex: 0.5;
+  width: 100%;
+  height: 100%;
+}
+
+.section-right-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지를 비율을 유지하면서 div를 꽉 채움 */
+}
+
+.weekly {
+  width: 100%;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* .weekly::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #4b3b31;
+  transform: translate(0, -50%);
+  z-index: -3;
+} */
+
+.section-weekly {
+  margin-top: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  gap: 40px;
+  width: 100%;
+}
+
+.best-item {
+  background-color: #fff;
+  text-align: center;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.best-item::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(30, 30, 30, 0.6), rgba(0, 0, 0, 0));
+  z-index: 1;
+}
+
+.best-item h3,
+.best-item p.description,
+.best-item p.price {
+  position: relative; /* 텍스트를 그라데이션 오버레이 위에 위치시키기 위해 relative로 설정 */
+  z-index: 2; /* 텍스트의 z-index를 오버레이보다 높게 설정 */
+  color: white;
+}
+
+.best-left {
+  flex: 3;
+  height: 500px;
+  margin-left: 0;
+}
+
+.best-center {
+  flex: 4;
+  height: 700px;
+  margin: 0 10px;
+}
+
+.best-right {
+  flex: 3;
+  height: 500px;
+  margin-right: 0;
+}
+
+.best-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지를 비율을 유지하면서 div를 꽉 채움 */
+}
+
+.best-item h3 {
+  position: absolute;
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  bottom: 10px;
+  left: 5px;
+  text-align: left;
+  padding: 40px 20px;
+}
+
+.best-item p.description {
+  position: absolute;
+  font-size: 18px;
+  font-weight: 300;
+  bottom: 20px;
+  left: 5px;
+  text-align: left;
+  padding: 0 20px;
+  color: white;
+  opacity: 0.8;
+}
+
+.best-item p.price {
+  position: absolute;
+  font-size: 14px;
+  bottom: 20px;
+  right: 5px;
+  text-align: right;
+  padding: 0 20px;
+  color: white;
+}
+
+.weekly-b {
+  position: absolute;
+  width: 340px;
+  height: auto;
+  left: 300px;
+  opacity: 0.8;
+}
+
+.weekly-i {
+  position: absolute;
+  width: 340px;
+  height: auto;
+  left: 68%;
+  top: 545px;
+  opacity: 0.8;
+}

@@ -1,0 +1,119 @@
+.celeb-section {
+  margin-top: 200px;
+  width: 100%;
+  height: 100%;
+  padding-left: 80px;
+}
+
+.title {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.title h1 {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.title > p {
+  font-size: 18px;
+  padding-top: 18px;
+  color: #4b3b31;
+}
+
+.celeb-images {
+  margin-top: 40px;
+  width: 100%;
+  height: 620px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.celeb-img {
+  position: relative;
+  flex: 1;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.4s ease-in-out;
+}
+
+.celeb-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease-in-out;
+}
+
+.celeb-dsc {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 100%;
+}
+
+.celeb-dsc > h2,
+.text,
+.celeb-price,
+.celeb-btn {
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  color: white;
+}
+
+.celeb-dsc > h2 {
+  font-size: 32px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.celeb-dsc > p.text {
+  font-size: 16px;
+  font-weight: 300;
+  max-width: 85%;
+  overflow-wrap: break-word;
+  word-break: keep-all;
+  white-space: normal;
+  padding-bottom: 20px;
+}
+
+.celeb-dsc > .celeb-price {
+  font-size: 18px;
+  font-weight: 400;
+  padding-bottom: 50px;
+}
+
+.celeb-dsc > .celeb-btn {
+  font-size: 18px;
+  font-weight: 300;
+  padding: 8px 16px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+}
+
+.celeb-img.hover img {
+  filter: brightness(0.5); /* 이미지 어둡게 */
+}
+
+.celeb-img.hover h2,
+.celeb-img.hover p.celeb-price,
+.celeb-img.hover .celeb-btn {
+  opacity: 1; /* 텍스트가 보이게 */
+}
+
+.celeb-img.hover p.text {
+  opacity: 0.6;
+}
