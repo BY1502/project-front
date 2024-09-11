@@ -64,7 +64,7 @@ function JoinInfo() {
     };
 
     axios
-      .post('http://localhost:8080/signup', formData)
+      .post('https://taskbackend.gunu110.com/signup', formData)
       .then((res) => {
         if (res.status === 201) {
           alert('회원가입 성공 ! 로그인 페이지로 이동합니다. ');

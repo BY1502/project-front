@@ -16,7 +16,7 @@ function Mypage() {
   useEffect(() => {
     // 유저 정보를 가져오는 API 호출
     axios
-      .get('http://localhost:8080/api/mypage/getUserInfo', {
+      .get('https://taskbackend.gunu110.com/api/mypage/getUserInfo', {
         withCredentials: true,
       })
       .then((res) => {
@@ -52,16 +52,19 @@ function Mypage() {
     // 비밀번호 확인 요청
     axios
       .post(
-        'http://localhost:8080/api/mypage/checkPassword',
+        'https://taskbackend.gunu110.com/api/mypage/checkPassword',
         { password },
         { withCredentials: true }
       )
       .then((res) => {
         if (res.status === 200) {
           // 비밀번호 확인 성공 후 탈퇴 요청
-          return axios.delete('http://localhost:8080/api/mypage/delete', {
-            withCredentials: true,
-          });
+          return axios.delete(
+            'https://taskbackend.gunu110.com/api/mypage/delete',
+            {
+              withCredentials: true,
+            }
+          );
         } else {
           setError('비밀번호가 일치하지 않습니다.');
         }

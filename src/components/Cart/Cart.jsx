@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import "./cart.css";
-import { LuPlus, LuMinus } from "react-icons/lu";
+import React, { useEffect, useState } from 'react';
+import './cart.css';
+import { LuPlus, LuMinus } from 'react-icons/lu';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -8,13 +8,13 @@ const Cart = () => {
 
   useEffect(() => {
     // 사용자별 장바구니 데이터를 서버에서 가져오기
-    fetch("http://localhost:8080/api/get-basket", {
-      method: "GET",
-      credentials: "include", // 쿠키 포함 요청
+    fetch('https://taskbackend.gunu110.com/api/get-basket', {
+      method: 'GET',
+      credentials: 'include', // 쿠키 포함 요청
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Fetched data:", data); // 데이터를 콘솔에 출력하여 확인
+        console.log('Fetched data:', data); // 데이터를 콘솔에 출력하여 확인
         if (Array.isArray(data)) {
           // 각 제품에 기본 수량(quantity)을 설정
           const updatedProducts = data.map((product) => ({
@@ -29,7 +29,7 @@ const Cart = () => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching basket data:", error);
+        console.error('Error fetching basket data:', error);
         setProducts([]); // 오류가 발생한 경우에도 안전하게 빈 배열로 설정
       });
   }, []);
@@ -74,25 +74,25 @@ const Cart = () => {
 
   const calculateTotalPrice = () => {
     return products.reduce((total, product) => {
-      const priceString = product?.productprice || "0";
-      const price = parseFloat(priceString.replace(/,/g, ""));
+      const priceString = product?.productprice || '0';
+      const price = parseFloat(priceString.replace(/,/g, ''));
       return total + (product.checked ? price * product.quantity : 0);
     }, 0);
   };
 
   const handleDeleteProduct = (productid) => {
     // 서버에 삭제 요청 보내기
-    fetch("http://localhost:8080/api/remove-from-basket", {
-      method: "POST",
-      credentials: "include",
+    fetch('https://taskbackend.gunu110.com/api/remove-from-basket', {
+      method: 'POST',
+      credentials: 'include',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ productid }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error('Network response was not ok');
         }
         // 서버에서 삭제가 성공하면, 로컬 상태에서 해당 제품 제거
         setProducts((prevProducts) =>
@@ -104,7 +104,7 @@ const Cart = () => {
         alert(data.message);
       })
       .catch((error) => {
-        console.error("Error deleting product from cart:", error);
+        console.error('Error deleting product from cart:', error);
       });
   };
 
@@ -115,17 +115,17 @@ const Cart = () => {
 
     if (selectedProductIds.length === 0) return;
 
-    fetch("http://localhost:8080/api/select-remove-from-basket", {
-      method: "POST",
-      credentials: "include",
+    fetch('https://taskbackend.gunu110.com/api/select-remove-from-basket', {
+      method: 'POST',
+      credentials: 'include',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ productids: selectedProductIds }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error('Network response was not ok');
         }
         return response.json();
       })
@@ -139,32 +139,32 @@ const Cart = () => {
         );
       })
       .catch((error) => {
-        console.error("Error deleting products from cart:", error);
+        console.error('Error deleting products from cart:', error);
       });
   };
 
   const handleOrderProduct = (productid) => {
     // API 호출 대신 리디렉션
-    window.location.href = "/order_completed";
+    window.location.href = '/order_completed';
   };
 
   const handleOrderSelected = () => {
     const selectedProducts = products.filter((product) => product.checked);
     if (selectedProducts.length === 0) {
-      alert("선택된 상품이 없습니다.");
+      alert('선택된 상품이 없습니다.');
       return;
     }
     // API 호출 대신 리디렉션
-    window.location.href = "/order_completed";
+    window.location.href = '/order_completed';
   };
 
   const handleOrderAll = () => {
     if (products.length === 0) {
-      alert("장바구니에 담긴 상품이 없습니다.");
+      alert('장바구니에 담긴 상품이 없습니다.');
       return;
     }
     // API 호출 대신 리디렉션
-    window.location.href = "/order_completed";
+    window.location.href = '/order_completed';
   };
 
   return (
@@ -172,7 +172,7 @@ const Cart = () => {
       <div>
         <h1
           className="text-[48px] mt-[140px] pl-[80px]"
-          style={{ fontWeight: "600" }}
+          style={{ fontWeight: '600' }}
         >
           MY CART
         </h1>

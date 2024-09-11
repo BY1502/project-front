@@ -13,7 +13,7 @@ const Product = () => {
 
   useEffect(() => {
     // 데이터 가져오기
-    fetch('http://localhost:8080/api/products')
+    fetch('https://taskbackend.gunu110.com/api/products')
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -41,12 +41,12 @@ const Product = () => {
   });
 
   return (
-    <div className='Product-Page'>
-      <div className='product-section'>
-        <div className='gender'>
+    <div className="Product-Page">
+      <div className="product-section">
+        <div className="gender">
           <h1>WOMANS</h1>
         </div>
-        <div className='item-menu'>
+        <div className="item-menu">
           <button
             className={`menu-button ${
               activeCategory === 'ALL' ? 'active' : ''
@@ -83,7 +83,7 @@ const Product = () => {
       </div>
 
       {/* 상품 이미지 섹션 */}
-      <div className='section product-images'>
+      <div className="section product-images">
         {filteredProducts.map((product, index) => (
           <div
             key={product.productid}
@@ -91,11 +91,11 @@ const Product = () => {
             className={`product-img ${index + 1}`}
           >
             <img
-              src={`http://localhost:8080/img/${product.productimage}`}
+              src={`https://taskbackend.gunu110.com//img/${product.productimage}`}
               alt={product.product_name}
             />
 
-            <div href='' className='product-text'>
+            <div href="" className="product-text">
               <h2>{product.productname}</h2>
               <p>KRW {product.productprice.toLocaleString()}</p>
             </div>
@@ -132,8 +132,8 @@ const Product = () => {
           </div>
         </div>
       </div> */}
-      <div className='pagination'>
-        <button className='active'>1</button>
+      <div className="pagination">
+        <button className="active">1</button>
         <button>2</button>
         <button>3</button>
       </div>

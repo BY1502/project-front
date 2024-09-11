@@ -53,7 +53,7 @@ function JoinInfo() {
     };
 
     axios
-      .post('http://localhost:8080/auth/googleinfo', formData)
+      .post('https://taskbackend.gunu110.com/auth/googleinfo', formData)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           navigate('/login');

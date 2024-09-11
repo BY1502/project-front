@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./detail.css";
-import { LuPlus, LuMinus } from "react-icons/lu";
-import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from 'react';
+import './detail.css';
+import { LuPlus, LuMinus } from 'react-icons/lu';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Detail = () => {
   const stickyRef = useRef(null);
@@ -16,21 +16,21 @@ const Detail = () => {
 
   useEffect(() => {
     // 데이터 가져오기
-    fetch(`http://localhost:8080/api/products/${productid}`)
+    fetch(`https://taskbackend.gunu110.com/api/products/${productid}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setProduct(data);
       })
       .catch((error) => {
-        console.error("Error fetching products:", error);
+        console.error('Error fetching products:', error);
       });
   }, [productid]);
 
   // 총 가격 계산 함수
   const calculateTotalPrice = () => {
-    const priceString = product?.productprice || "0";
-    const price = parseFloat(priceString.replace(/,/g, ""));
+    const priceString = product?.productprice || '0';
+    const price = parseFloat(priceString.replace(/,/g, ''));
     return price * quantity;
   };
 
@@ -50,42 +50,42 @@ const Detail = () => {
   const handleBuyNow = () => {
     if (!authData) {
       const userConfirmed = window.confirm(
-        "로그인 시 사용할 수 있는 페이지입니다. 로그인하시겠습니까?"
+        '로그인 시 사용할 수 있는 페이지입니다. 로그인하시겠습니까?'
       );
 
       if (userConfirmed) {
-        navigate("/login");
+        navigate('/login');
       }
       return; // 로그인되지 않은 상태에서는 장바구니에 추가하지 않음
     }
 
-    navigate("/order_completed");
+    navigate('/order_completed');
   };
 
   // ADD TO CART 버튼 클릭 핸들러
   const handleAddToCart = () => {
     if (!authData) {
       const userConfirmed = window.confirm(
-        "로그인 시 사용할 수 있는 페이지입니다. 로그인하시겠습니까?"
+        '로그인 시 사용할 수 있는 페이지입니다. 로그인하시겠습니까?'
       );
 
       if (userConfirmed) {
-        navigate("/login");
+        navigate('/login');
       }
       return; // 로그인되지 않은 상태에서는 장바구니에 추가하지 않음
     }
 
     const userConfirmed = window.confirm(
-      "장바구니에 상품을 추가 하시겠습니까?"
+      '장바구니에 상품을 추가 하시겠습니까?'
     );
 
     if (userConfirmed) {
-      fetch(`http://localhost:8080/api/add-to-basket`, {
-        method: "POST",
+      fetch(`https://taskbackend.gunu110.com/api/add-to-basket`, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        credentials: "include",
+        credentials: 'include',
         body: JSON.stringify({
           productid: productid,
           quantity: quantity,
@@ -98,7 +98,7 @@ const Detail = () => {
               if (response.status === 409) {
                 alert(data.message); // 이미 장바구니에 있는 상품입니다. 메시지 출력
               } else {
-                throw new Error("Network response was not ok");
+                throw new Error('Network response was not ok');
               }
             });
           }
@@ -107,16 +107,16 @@ const Detail = () => {
         .then((data) => {
           alert(data.message);
           const usercart = window.confirm(
-            "장바구니 페이지로 이동하시겠습니까?"
+            '장바구니 페이지로 이동하시겠습니까?'
           );
 
           if (usercart) {
-            navigate("/cart");
+            navigate('/cart');
           }
           // navigate("/cart");
         })
         .catch((error) => {
-          console.error("Error adding to cart:", error);
+          console.error('Error adding to cart:', error);
         });
     }
   };
@@ -137,15 +137,15 @@ const Detail = () => {
             const offset = ratio * relativeHeight;
             sticky.style.top = `-${offset}px`;
           } else {
-            sticky.style.top = "0";
+            sticky.style.top = '0';
           }
         }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -159,7 +159,7 @@ const Detail = () => {
         <div className="image-gallery">
           <img
             className="main-p-img"
-            src={`http://localhost:8080/img/${product.productimage}`}
+            src={`https://taskbackend.gunu110.com/img/${product.productimage}`}
             alt="메인 이미지"
           />
           <img

@@ -45,7 +45,7 @@ function Login() {
     setErrors(newErrors);
 
     axios
-      .post('http://localhost:8080/login', formData)
+      .post('https://taskbackend.gunu110.com/login', formData)
       .then((res) => {
         if (res.status === 201) {
           console.log(res);
@@ -72,7 +72,7 @@ function Login() {
   };
 
   const handleGoogleSignUp = () => {
-    window.location.href = 'http://localhost:8080/auth/google'; // 구글 연동 회원가입 페이지로 이동
+    window.location.href = 'https://taskbackend.gunu110.com/auth/google'; // 구글 연동 회원가입 페이지로 이동
   };
 
   return (
