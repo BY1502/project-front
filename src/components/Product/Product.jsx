@@ -13,7 +13,7 @@ const Product = () => {
 
   useEffect(() => {
     // 데이터 가져오기
-    fetch('https://taskbackend.gunu110.com/api/products')
+    fetch('https://aiccback.gunu110.com/api/products')
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -91,7 +91,7 @@ const Product = () => {
             className={`product-img ${index + 1}`}
           >
             <img
-              src={`https://taskbackend.gunu110.com//img/${product.productimage}`}
+              src={`https://aiccback.gunu110.com/img/${product.productimage}`}
               alt={product.product_name}
             />
 

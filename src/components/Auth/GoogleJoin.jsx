@@ -53,7 +53,7 @@ function JoinInfo() {
     };
 
     axios
-      .post('https://taskbackend.gunu110.com/auth/googleinfo', formData)
+      .post('https://aiccback.gunu110.com/auth/googleinfo', formData)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           navigate('/login');

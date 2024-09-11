@@ -115,7 +115,7 @@ const Cart = () => {
 
     if (selectedProductIds.length === 0) return;
 
-    fetch('https://taskbackend.gunu110.com/api/select-remove-from-basket', {
+    fetch('https://aiccback.gunu110.com/api/select-remove-from-basket', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -215,7 +215,7 @@ const Cart = () => {
                     </td>
                     <td className="product-info">
                       <img
-                        src={`http://localhost:8080/img/${product.productimage}`}
+                        src={`https://aiccback.gunu110.com/img/${product.productimage}`}
                         alt={product.productname}
                       />
                       <span>{product.productname}</span>

@@ -52,7 +52,7 @@ function Mypage() {
     // 비밀번호 확인 요청
     axios
       .post(
-        'https://taskbackend.gunu110.com/api/mypage/checkPassword',
+        'https://aiccback.gunu110.com/api/mypage/checkPassword',
         { password },
         { withCredentials: true }
       )
@@ -60,7 +60,7 @@ function Mypage() {
         if (res.status === 200) {
           // 비밀번호 확인 성공 후 탈퇴 요청
           return axios.delete(
-            'https://taskbackend.gunu110.com/api/mypage/delete',
+            'https://aiccback.gunu110.com/api/mypage/delete',
             {
               withCredentials: true,
             }
