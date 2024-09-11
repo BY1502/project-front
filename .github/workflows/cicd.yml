@@ -1,0 +1,36 @@
+# Referrence: https://synuns.tistory.com/75
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: |
+
+      - name: Sign in to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: docker build -t shimgeon/task-front .
+      - name: Push Docker Image
+        run: docker push shimgeon/task-front:latest
+
+  deploy:
+    needs: build
+    runs-on: aws-ec2
+    #  —------ 이 부분까지 입력하고, 19 ~ 28번 절차 진행
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull shimgeon/project-front:latest
+      - name: Delete existing container
+        run: docker rm -f reactContainer
+      - name: Run container
+        run: docker run -d -p 80:80 --name reactContainer shimgeon/project-front
