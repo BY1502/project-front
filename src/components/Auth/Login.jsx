@@ -45,7 +45,9 @@ function Login() {
     setErrors(newErrors);
 
     axios
-      .post('https://aiccback.gunu110.com/login', formData)
+      .post('https://aiccback.gunu110.com/login', formData, {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.status === 201) {
           console.log(res);
