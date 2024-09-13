@@ -8,7 +8,7 @@ const Cart = () => {
 
   useEffect(() => {
     // 사용자별 장바구니 데이터를 서버에서 가져오기
-    fetch('https://taskbackend.gunu110.com/api/get-basket', {
+    fetch('https://aiccback.gunu110.com/api/get-basket', {
       method: 'GET',
       credentials: 'include', // 쿠키 포함 요청
     })
@@ -82,7 +82,7 @@ const Cart = () => {
 
   const handleDeleteProduct = (productid) => {
     // 서버에 삭제 요청 보내기
-    fetch('https://taskbackend.gunu110.com/api/remove-from-basket', {
+    fetch('https://aiccback.gunu110.com/api/remove-from-basket', {
       method: 'POST',
       credentials: 'include',
       headers: {
