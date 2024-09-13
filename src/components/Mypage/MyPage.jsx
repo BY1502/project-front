@@ -16,7 +16,7 @@ function Mypage() {
   useEffect(() => {
     // 유저 정보를 가져오는 API 호출
     axios
-      .get('https://taskbackend.gunu110.com/api/mypage/getUserInfo', {
+      .get('https://aiccback.gunu110.com/api/mypage/getUserInfo', {
         withCredentials: true,
       })
       .then((res) => {
