@@ -72,7 +72,7 @@ function Login() {
   };
 
   const handleGoogleSignUp = () => {
-    window.location.href = 'https://aicc.gunu110.com/auth/google'; // 구글 연동 회원가입 페이지로 이동
+    window.location.href = 'https://aiccback.gunu110.com/auth/google'; // 구글 연동 회원가입 페이지로 이동
   };
 
   return (

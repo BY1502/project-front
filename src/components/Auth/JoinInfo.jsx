@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './joininfo.css';
 import axios from 'axios';
+import { API_URLS } from '../../utils/apiUrl';
 
 function JoinInfo() {
   const [nickname, setNickname] = useState('');
