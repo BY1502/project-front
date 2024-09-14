@@ -84,6 +84,8 @@ const Detail = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          // Authorization 헤더에 토큰을 추가
+          Authorization: `Bearer ${authData?.token}`,
         },
         credentials: 'include',
         body: JSON.stringify({
