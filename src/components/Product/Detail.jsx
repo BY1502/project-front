@@ -87,11 +87,11 @@ const Detail = () => {
           {
             productid: productid,
             quantity: quantity,
+            authData: authData, // authData를 요청 바디에 포함
           },
           {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${authData.token}`, // Authorization 헤더에 토큰 추가
             },
             withCredentials: true, // 쿠키 전송 허용
           }
