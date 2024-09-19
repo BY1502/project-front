@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './detail.css';
+import axios from 'axios';
 import { LuPlus, LuMinus } from 'react-icons/lu';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
