@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import './login.css';
 import { login } from '../../redux/slices/authSlice';
 
+import { RiKakaoTalkFill } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
 
 function Login() {
@@ -77,6 +78,10 @@ function Login() {
     window.location.href = 'https://aiccback.gunu110.com/auth/google'; // 구글 연동 회원가입 페이지로 이동
   };
 
+  const handleKakaoSignUp = () => {
+    window.location.href = 'https://aiccback.gunu110.com/oauth'; // 카카오 연동 회원가입 페이지로 이동
+  };
+
   return (
     <div className="login-wrapper">
       <h2 className="login-title">LOGIN</h2>
@@ -132,6 +137,10 @@ function Login() {
           <button onClick={handleGoogleSignUp} className="google-button">
             <FcGoogle className="google-icon" />
             <p className="google-p">구글로 시작하기</p>
+          </button>
+          <button onClick={handleKakaoSignUp} className="kakao-button">
+            <RiKakaoTalkFill className="kakao-icon" />
+            <p className="kakao-p">카카오로 시작하기</p>
           </button>
         </div>
       </div>
