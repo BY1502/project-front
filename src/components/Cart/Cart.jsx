@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './cart.css';
 import { LuPlus, LuMinus } from 'react-icons/lu';
+import axios from 'axios';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -8,12 +9,12 @@ const Cart = () => {
 
   useEffect(() => {
     // 사용자별 장바구니 데이터를 서버에서 가져오기
-    fetch('https://aiccback.gunu110.com/api/get-basket', {
-      method: 'GET',
-      credentials: 'include', // 쿠키 포함 요청
-    })
-      .then((response) => response.json())
-      .then((data) => {
+    axios
+      .get('https://aiccback.gunu110.com/api/get-basket', {
+        withCredentials: true, // 쿠키 포함 요청
+      })
+      .then((response) => {
+        const data = response.data;
         console.log('Fetched data:', data); // 데이터를 콘솔에 출력하여 확인
         if (Array.isArray(data)) {
           // 각 제품에 기본 수량(quantity)을 설정
@@ -82,26 +83,18 @@ const Cart = () => {
 
   const handleDeleteProduct = (productid) => {
     // 서버에 삭제 요청 보내기
-    fetch('https://aiccback.gunu110.com/api/remove-from-basket', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ productid }),
-    })
+    axios
+      .post(
+        'https://aiccback.gunu110.com/api/remove-from-basket',
+        { productid },
+        { withCredentials: true }
+      )
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
         // 서버에서 삭제가 성공하면, 로컬 상태에서 해당 제품 제거
         setProducts((prevProducts) =>
           prevProducts.filter((product) => product.productid !== productid)
         );
-        return response.json();
-      })
-      .then((data) => {
-        alert(data.message);
+        alert(response.data.message);
       })
       .catch((error) => {
         console.error('Error deleting product from cart:', error);
@@ -115,23 +108,14 @@ const Cart = () => {
 
     if (selectedProductIds.length === 0) return;
 
-    fetch('https://aiccback.gunu110.com/api/select-remove-from-basket', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ productids: selectedProductIds }),
-    })
+    axios
+      .post(
+        'https://aiccback.gunu110.com/api/select-remove-from-basket',
+        { productids: selectedProductIds },
+        { withCredentials: true }
+      )
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        alert(data.message);
-        // console.log('선택된 상품 삭제 완료:', data);
+        alert(response.data.message);
         setProducts((prevProducts) =>
           prevProducts.filter(
             (product) => !selectedProductIds.includes(product.productid)
