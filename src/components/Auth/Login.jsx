@@ -78,9 +78,9 @@ function Login() {
     window.location.href = 'https://aiccback.gunu110.com/auth/google'; // 구글 연동 회원가입 페이지로 이동
   };
 
-  const handleKakaoSignUp = () => {
-    window.location.href = 'https://aiccback.gunu110.com/oauth'; // 카카오 연동 회원가입 페이지로 이동
-  };
+  // const handleKakaoSignUp = () => {
+  //   window.location.href = 'https://aiccback.gunu110.com/oauth'; // 카카오 연동 회원가입 페이지로 이동
+  // };
 
   return (
     <div className="login-wrapper">
@@ -138,10 +138,10 @@ function Login() {
             <FcGoogle className="google-icon" />
             <p className="google-p">구글로 시작하기</p>
           </button>
-          <button onClick={handleKakaoSignUp} className="kakao-button">
+          {/* <button onClick={handleKakaoSignUp} className="kakao-button">
             <RiKakaoTalkFill className="kakao-icon" />
-            <p className="kakao-p">카카오로 시작하기</p>
-          </button>
+            <p className="kakao-p">카카오로 시작하기</p> */}
+          {/* </button> */}
         </div>
       </div>
     </div>
