@@ -80,45 +80,44 @@ const Detail = () => {
     );
 
     if (userConfirmed) {
-      fetch(`https://aiccback.gunu110.com/api/add-to-basket`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Authorization 헤더에 토큰을 추가
-          Authorization: `Bearer ${authData?.token}`,
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          productid: productid,
-          quantity: quantity,
-        }),
-      })
+      axios
+        .post(
+          `https://aiccback.gunu110.com/api/add-to-basket`,
+          {
+            productid: productid,
+            quantity: quantity,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${authData?.token}`, // Authorization 헤더에 토큰 추가
+            },
+            withCredentials: true, // 쿠키 전송 허용
+          }
+        )
         .then((response) => {
-          if (!response.ok) {
-            return response.json().then((data) => {
-              // 백엔드에서 409 상태 코드가 반환된 경우
-              if (response.status === 409) {
-                alert(data.message); // 이미 장바구니에 있는 상품입니다. 메시지 출력
-              } else {
-                throw new Error('Network response was not ok');
-              }
-            });
-          }
-          return response.json();
-        })
-        .then((data) => {
-          alert(data.message);
-          const usercart = window.confirm(
-            '장바구니 페이지로 이동하시겠습니까?'
-          );
+          if (response.status === 409) {
+            // 백엔드에서 409 상태 코드가 반환된 경우
+            alert(response.data.message); // 이미 장바구니에 있는 상품입니다. 메시지 출력
+          } else {
+            alert(response.data.message);
+            const usercart = window.confirm(
+              '장바구니 페이지로 이동하시겠습니까?'
+            );
 
-          if (usercart) {
-            navigate('/cart');
+            if (usercart) {
+              navigate('/cart');
+            }
           }
-          // navigate("/cart");
         })
         .catch((error) => {
           console.error('Error adding to cart:', error);
+          if (error.response) {
+            alert(
+              error.response.data.message ||
+                '장바구니 추가 중 오류가 발생했습니다.'
+            );
+          }
         });
     }
   };
