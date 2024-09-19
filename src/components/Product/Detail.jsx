@@ -91,7 +91,7 @@ const Detail = () => {
           {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${authData?.token}`, // Authorization 헤더에 토큰 추가
+              Authorization: `Bearer ${authData.token}`, // Authorization 헤더에 토큰 추가
             },
             withCredentials: true, // 쿠키 전송 허용
           }
