@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './mypage.css';
 import { useSelector } from 'react-redux'; // Redux에서 authData 가져오기
-
+// 수정하기
 function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
