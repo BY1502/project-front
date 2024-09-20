@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './mypage.css';
+import { useSelector } from 'react-redux'; // Redux에서 authData 가져오기
 
 function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
@@ -13,12 +14,21 @@ function Mypage() {
     contact: '',
   });
 
+  const authData = useSelector((state) => state.auth.authData); // Redux에서 authData 가져오기
+
   useEffect(() => {
+    if (!authData || !authData.email) {
+      console.error('로그인이 필요합니다.');
+      return;
+    }
+
     // 유저 정보를 가져오는 API 호출
     axios
-      .get('https://aiccback.gunu110.com/api/mypage/getUserInfo', {
-        withCredentials: true,
-      })
+      .post(
+        'https://aiccback.gunu110.com/api/mypage/getUserInfo',
+        { email: authData.email }, // authData에서 email을 요청 바디로 전송
+        { withCredentials: true }
+      )
       .then((res) => {
         setUserInfo(res.data);
         setFormData({
@@ -29,12 +39,8 @@ function Mypage() {
       })
       .catch((err) => {
         console.error('Error fetching user info:', err);
-        // if (err.response && err.response.status === 401) {
-        //   alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
-        //   window.location.href = '/login';
-        // }
       });
-  }, []);
+  }, [authData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,11 +55,16 @@ function Mypage() {
   };
 
   const handleConfirmDelete = () => {
+    if (!authData || !authData.email) {
+      console.error('로그인이 필요합니다.');
+      return;
+    }
+
     // 비밀번호 확인 요청
     axios
       .post(
         'https://aiccback.gunu110.com/api/mypage/checkPassword',
-        { password },
+        { email: authData.email, password },
         { withCredentials: true }
       )
       .then((res) => {
@@ -62,6 +73,7 @@ function Mypage() {
           return axios.delete(
             'https://aiccback.gunu110.com/api/mypage/delete',
             {
+              data: { email: authData.email },
               withCredentials: true,
             }
           );

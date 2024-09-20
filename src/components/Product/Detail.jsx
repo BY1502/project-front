@@ -204,9 +204,9 @@ const Detail = () => {
             <button className="buy-now" onClick={handleBuyNow}>
               BUY NOW
             </button>
-            {/* <button className="add-to-cart" onClick={handleAddToCart}>
+            <button className="add-to-cart" onClick={handleAddToCart}>
               ADD TO CART
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
