@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './mypage.css';
 import { useSelector } from 'react-redux'; // Redux에서 authData 가져오기
-// 수정하기
+
 function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
@@ -22,12 +22,13 @@ function Mypage() {
       return;
     }
 
-    // 유저 정보를 가져오는 API 호출
+    // 유저 정보를 가져오는 API 호출, 쿼리 파라미터로 email을 전송
     axios
-      .post(
-        'https://aiccback.gunu110.com/api/mypage/getUserInfo',
-        { email: authData.email }, // authData에서 email을 요청 바디로 전송
-        { withCredentials: true }
+      .get(
+        `https://aiccback.gunu110.com/api/mypage/getUserInfo?email=${authData.email}`,
+        {
+          withCredentials: true,
+        }
       )
       .then((res) => {
         setUserInfo(res.data);
@@ -42,18 +43,7 @@ function Mypage() {
       });
   }, [authData]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleDelete = () => {
-    setIsModalOpen(true);
-  };
-
+  // 탈퇴 핸들러, 비밀번호와 함께 email을 URL 파라미터로 전송
   const handleConfirmDelete = () => {
     if (!authData || !authData.email) {
       console.error('로그인이 필요합니다.');
@@ -63,19 +53,15 @@ function Mypage() {
     // 비밀번호 확인 요청
     axios
       .post(
-        'https://aiccback.gunu110.com/api/mypage/checkPassword',
-        { email: authData.email, password },
+        `https://aiccback.gunu110.com/api/mypage/checkPassword?email=${authData.email}`,
+        { password }, // password는 여전히 바디로 전송
         { withCredentials: true }
       )
       .then((res) => {
         if (res.status === 200) {
-          // 비밀번호 확인 성공 후 탈퇴 요청
           return axios.delete(
-            'https://aiccback.gunu110.com/api/mypage/delete',
-            {
-              data: { email: authData.email },
-              withCredentials: true,
-            }
+            `https://aiccback.gunu110.com/api/mypage/delete?email=${authData.email}`,
+            { withCredentials: true }
           );
         } else {
           setError('비밀번호가 일치하지 않습니다.');
@@ -96,16 +82,6 @@ function Mypage() {
         }
       });
   };
-
-  const handleCancelDelete = () => {
-    setIsModalOpen(false);
-    setPassword('');
-    setError('');
-  };
-
-  if (!userInfo) {
-    return <p>로딩 중...</p>;
-  }
 
   return (
     <div className="mypage-wrapper">
