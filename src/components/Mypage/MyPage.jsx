@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './mypage.css';
-import { useSelector } from 'react-redux'; // Redux에서 authData 가져오기
+import { useSelector } from 'react-redux';
 
 function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
@@ -14,7 +14,7 @@ function Mypage() {
     contact: '',
   });
 
-  const authData = useSelector((state) => state.auth.authData); // Redux에서 authData 가져오기
+  const authData = useSelector((state) => state.auth.authData);
 
   useEffect(() => {
     if (!authData || !authData.email) {
@@ -22,7 +22,6 @@ function Mypage() {
       return;
     }
 
-    // 유저 정보를 가져오는 API 호출, 쿼리 파라미터로 email을 전송
     axios
       .get(
         `https://aiccback.gunu110.com/api/mypage/getUserInfo?email=${authData.email}`,
@@ -43,18 +42,38 @@ function Mypage() {
       });
   }, [authData]);
 
-  // 탈퇴 핸들러, 비밀번호와 함께 email을 URL 파라미터로 전송
+  // handleInputChange 함수 추가
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // handleDelete 함수 추가
+  const handleDelete = () => {
+    setIsModalOpen(true);
+  };
+
+  // handleCancelDelete 함수 추가
+  const handleCancelDelete = () => {
+    setIsModalOpen(false);
+    setPassword('');
+    setError('');
+  };
+
+  // 탈퇴 요청 함수
   const handleConfirmDelete = () => {
     if (!authData || !authData.email) {
       console.error('로그인이 필요합니다.');
       return;
     }
 
-    // 비밀번호 확인 요청
     axios
       .post(
         `https://aiccback.gunu110.com/api/mypage/checkPassword?email=${authData.email}`,
-        { password }, // password는 여전히 바디로 전송
+        { password },
         { withCredentials: true }
       )
       .then((res) => {
@@ -83,6 +102,10 @@ function Mypage() {
       });
   };
 
+  if (!userInfo) {
+    return <p>로딩 중...</p>;
+  }
+
   return (
     <div className="mypage-wrapper">
       <h2 className="mypage-title">MY PAGE</h2>
@@ -94,7 +117,7 @@ function Mypage() {
             id="nickname"
             name="nickname"
             value={formData.nickname}
-            onChange={handleInputChange}
+            onChange={handleInputChange} // handleInputChange 함수 연결
           />
           <label htmlFor="email">이메일</label>
           <input
@@ -102,7 +125,7 @@ function Mypage() {
             id="email"
             name="email"
             value={formData.email}
-            onChange={handleInputChange}
+            onChange={handleInputChange} // handleInputChange 함수 연결
             disabled
           />
           <label htmlFor="contact">연락처</label>
@@ -111,12 +134,14 @@ function Mypage() {
             id="contact"
             name="contact"
             value={formData.contact}
-            onChange={handleInputChange}
+            onChange={handleInputChange} // handleInputChange 함수 연결
           />
         </div>
         <div className="button-group">
           <button className="edit-button">수정하기</button>
           <button className="delete-button" onClick={handleDelete}>
+            {' '}
+            {/* handleDelete 함수 연결 */}
             탈퇴하기
           </button>
         </div>
@@ -135,6 +160,8 @@ function Mypage() {
             {error && <p className="error">{error}</p>}
             <button onClick={handleConfirmDelete}>확인</button>
             <button className="cancel" onClick={handleCancelDelete}>
+              {' '}
+              {/* handleCancelDelete 함수 연결 */}
               취소
             </button>
           </div>
