@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './mypage.css';
-import { useSelector } from 'react-redux';
 
 function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
@@ -14,21 +13,13 @@ function Mypage() {
     contact: '',
   });
 
-  const authData = useSelector((state) => state.auth.authData);
-
   useEffect(() => {
-    if (!authData || !authData.email) {
-      console.error('로그인이 필요합니다.');
-      return;
-    }
-
+    // 이메일을 파라미터로 API 호출
+    const email = '사용자의 이메일'; // 실제로는 이 값을 상태 또는 인증 정보에서 가져와야 함
     axios
-      .get(
-        `https://aiccback.gunu110.com/api/mypage/getUserInfo?email=${authData.email}`,
-        {
-          withCredentials: true,
-        }
-      )
+      .get(`https://aiccback.gunu110.com/api/mypage/getUserInfo`, {
+        params: { email }, // 이메일을 쿼리 파라미터로 전달
+      })
       .then((res) => {
         setUserInfo(res.data);
         setFormData({
@@ -40,9 +31,8 @@ function Mypage() {
       .catch((err) => {
         console.error('Error fetching user info:', err);
       });
-  }, [authData]);
+  }, []);
 
-  // handleInputChange 함수 추가
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -51,36 +41,26 @@ function Mypage() {
     }));
   };
 
-  // handleDelete 함수 추가
   const handleDelete = () => {
     setIsModalOpen(true);
   };
 
-  // handleCancelDelete 함수 추가
-  const handleCancelDelete = () => {
-    setIsModalOpen(false);
-    setPassword('');
-    setError('');
-  };
-
-  // 탈퇴 요청 함수
   const handleConfirmDelete = () => {
-    if (!authData || !authData.email) {
-      console.error('로그인이 필요합니다.');
-      return;
-    }
-
+    // 비밀번호 확인 요청
+    const email = formData.email;
     axios
-      .post(
-        `https://aiccback.gunu110.com/api/mypage/checkPassword?email=${authData.email}`,
-        { password },
-        { withCredentials: true }
-      )
+      .post('https://aiccback.gunu110.com/api/mypage/checkPassword', {
+        email,
+        password,
+      })
       .then((res) => {
         if (res.status === 200) {
+          // 비밀번호 확인 성공 후 탈퇴 요청
           return axios.delete(
-            `https://aiccback.gunu110.com/api/mypage/delete?email=${authData.email}`,
-            { withCredentials: true }
+            'https://aiccback.gunu110.com/api/mypage/delete',
+            {
+              data: { email },
+            }
           );
         } else {
           setError('비밀번호가 일치하지 않습니다.');
@@ -102,6 +82,12 @@ function Mypage() {
       });
   };
 
+  const handleCancelDelete = () => {
+    setIsModalOpen(false);
+    setPassword('');
+    setError('');
+  };
+
   if (!userInfo) {
     return <p>로딩 중...</p>;
   }
@@ -117,7 +103,7 @@ function Mypage() {
             id="nickname"
             name="nickname"
             value={formData.nickname}
-            onChange={handleInputChange} // handleInputChange 함수 연결
+            onChange={handleInputChange}
           />
           <label htmlFor="email">이메일</label>
           <input
@@ -125,7 +111,7 @@ function Mypage() {
             id="email"
             name="email"
             value={formData.email}
-            onChange={handleInputChange} // handleInputChange 함수 연결
+            onChange={handleInputChange}
             disabled
           />
           <label htmlFor="contact">연락처</label>
@@ -134,14 +120,12 @@ function Mypage() {
             id="contact"
             name="contact"
             value={formData.contact}
-            onChange={handleInputChange} // handleInputChange 함수 연결
+            onChange={handleInputChange}
           />
         </div>
         <div className="button-group">
           <button className="edit-button">수정하기</button>
           <button className="delete-button" onClick={handleDelete}>
-            {' '}
-            {/* handleDelete 함수 연결 */}
             탈퇴하기
           </button>
         </div>
@@ -160,8 +144,6 @@ function Mypage() {
             {error && <p className="error">{error}</p>}
             <button onClick={handleConfirmDelete}>확인</button>
             <button className="cancel" onClick={handleCancelDelete}>
-              {' '}
-              {/* handleCancelDelete 함수 연결 */}
               취소
             </button>
           </div>
